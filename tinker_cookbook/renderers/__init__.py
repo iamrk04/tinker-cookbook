@@ -58,6 +58,7 @@ def get_renderer(
             - "gpt_oss_low_reasoning": GPT-OSS with low reasoning
             - "gpt_oss_medium_reasoning": GPT-OSS with medium reasoning
             - "gpt_oss_high_reasoning": GPT-OSS with high reasoning
+            - "phi4": Microsoft Phi-4 chat format
         tokenizer: The tokenizer to use.
         image_processor: Required for VL renderers.
 
@@ -80,6 +81,7 @@ def get_renderer(
         Qwen3VLRenderer,
     )
     from tinker_cookbook.renderers.role_colon import RoleColonRenderer
+    from tinker_cookbook.renderers.phi4 import Phi4Renderer
 
     if name == "role_colon":
         return RoleColonRenderer(tokenizer)
@@ -115,6 +117,8 @@ def get_renderer(
         return GptOssRenderer(tokenizer, use_system_prompt=True, reasoning_effort="medium")
     elif name == "gpt_oss_high_reasoning":
         return GptOssRenderer(tokenizer, use_system_prompt=True, reasoning_effort="high")
+    elif name == "phi4":
+        return Phi4Renderer(tokenizer)
     else:
         raise ValueError(f"Unknown renderer: {name}")
 
