@@ -23,9 +23,13 @@ def build_config_blueprint() -> chz.Blueprint[train.Config]:
             "model_name": model_name,
             "log_path": "/tmp/tinker-examples/rl_basic",
             "dataset_builder": builder,
-            "learning_rate": 4e-5,
-            "max_tokens": 256,
-            "eval_every": 0,
+            # "learning_rate": 4e-5,
+            # "max_tokens": 256,
+            # "eval_every": 0,
+            "learning_rate": 1e-5,       # Lower LR to prevent collapse (was 4e-5)
+            "max_tokens": 512,            # More room for chain-of-thought (was 256)
+            "eval_every": 5,              # Evaluate frequently to catch peak
+            "save_every": 5,              # Save checkpoints to pick best one
         }
     )
 
